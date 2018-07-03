@@ -10,6 +10,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { QuoteService } from '@app/home/quote.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,9 @@ import { HttpModule } from '@angular/http';
   ],
   declarations: [
     HomeComponent
+  ],
+  providers: [
+    QuoteService
   ]
 })
 export class HomeModule { }
