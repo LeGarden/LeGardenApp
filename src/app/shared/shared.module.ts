@@ -5,9 +5,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@app/material.module';
 import { LoaderComponent } from './loader/loader.component';
 
-import { IothubService } from './device/iothub.service';
-import { HttpClient } from '@angular/common/http';
-
 @NgModule({
   imports: [
     FlexLayoutModule,
@@ -20,11 +17,6 @@ import { HttpClient } from '@angular/common/http';
   exports: [
     LoaderComponent
   ],
-  providers: [
-    {
-      provide: IothubService,
-      useClass: IothubService
-    }
-  ]
+  providers: []
 })
 export class SharedModule { }

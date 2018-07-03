@@ -8,7 +8,6 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { DevicesComponent } from './devices/devices.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
@@ -25,8 +24,7 @@ import { HttpModule } from '@angular/http';
     HttpClientModule
   ],
   declarations: [
-    HomeComponent,
-    DevicesComponent
+    HomeComponent
   ]
 })
 export class HomeModule { }

@@ -5,7 +5,6 @@ import { finalize } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService } from '@app/core';
-import { IothubService } from '@app/shared/device/iothub.service';
 
 const log = new Logger('Login');
 
@@ -24,8 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private i18nService: I18nService,
-              private authenticationService: AuthenticationService,
-              private iothubService: IothubService) {
+              private authenticationService: AuthenticationService) {
     this.createForm();
   }
 
@@ -33,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.isLoading = true;
-    // this.iothubService.initialise(this.loginForm.value);
+    this.authenticationService.login(this.loginForm.value);
     this.isLoading = false;
   }
 
