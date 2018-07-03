@@ -1,0 +1,25 @@
+{
+  "generator-ngx-rocket": {
+    "version": "5.0.0",
+    "props": {
+      "location": "path",
+      "appName": "LeGardenApp",
+      "target": [
+        "web",
+        "cordova"
+      ],
+      "pwa": false,
+      "mobile": [
+        "ios",
+        "android"
+      ],
+      "ui": "material",
+      "layout": "side-menu",
+      "auth": true,
+      "lazy": false,
+      "angulartics": false,
+      "projectName": "le-garden-app",
+      "packageManager": "npm"
+    }
+  }
+}
