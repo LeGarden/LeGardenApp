@@ -4,4 +4,14 @@
     align-items: stretch;
     padding: 1em;
     height: 90%;
+
+    .actorstates {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        mat-slide-toggle {
+            margin-top: 1em;
+        }
+    }
   }

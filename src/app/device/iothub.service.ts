@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from '@app/core';
 import { map } from 'rxjs/operators';
 import { Device } from './device.model';
+import { Actorstate } from '@app/device/actorstate.model';
 
 @Injectable()
 export class IothubService {
@@ -28,6 +29,15 @@ export class IothubService {
         }})
         .pipe(
             map((body: Device) => body)
+        );
+    }
+
+    public getDeviceActorstates(deviceId: string): Observable<Actorstate[]> {
+        return this.httpClient.get(this.baseUri + '/devices/' + deviceId + '/actors/states', { headers: {
+            ['Ocp-Apim-Subscription-Key']: this.authenticationService.credentials.subscriptionKey
+        }})
+        .pipe(
+            map((body: Actorstate[]) => body)
         );
     }
 }
