@@ -3,5 +3,5 @@ export interface Actorstate {
     name: string;
     state: number;
 
-    loading: boolean;
+    isLoading: boolean;
 }

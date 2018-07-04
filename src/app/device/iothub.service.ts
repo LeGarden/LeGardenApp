@@ -40,4 +40,24 @@ export class IothubService {
             map((body: Actorstate[]) => body)
         );
     }
+
+    public putActorOn(deviceId: string, actorId: string): Observable<Actorstate> {
+        return this.httpClient.put(this.baseUri + '/devices/' + deviceId + '/actors/' + actorId + '/on',
+            null, { headers: {
+            ['Ocp-Apim-Subscription-Key']: this.authenticationService.credentials.subscriptionKey
+        }})
+        .pipe(
+            map((body: Actorstate) => body)
+        );
+    }
+
+    public putActorOff(deviceId: string, actorId: string): Observable<Actorstate> {
+        return this.httpClient.put(this.baseUri + '/devices/' + deviceId + '/actors/' + actorId + '/off',
+            null, { headers: {
+            ['Ocp-Apim-Subscription-Key']: this.authenticationService.credentials.subscriptionKey
+        }})
+        .pipe(
+            map((body: Actorstate) => body)
+        );
+    }
 }

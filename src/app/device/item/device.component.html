@@ -10,7 +10,8 @@
                 class="actorstate"
                 [color]="'accent'"
                 [checked]="actorstate.state == 1"
-                [disabled]="device.connectionState != 'Connected'">
+                [disabled]="device.connectionState != 'Connected' || actorstate.isLoading"
+                (change)="changeActorState($event, actorstate)">
                 {{ actorstate.name }}
             </mat-slide-toggle>
         </div>

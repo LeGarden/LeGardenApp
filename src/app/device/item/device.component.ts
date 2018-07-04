@@ -3,6 +3,7 @@ import { Device } from '../../device/device.model';
 import { ActivatedRoute } from '@angular/router';
 import { IothubService } from '@app/device/iothub.service';
 import { Actorstate } from '@app/device/actorstate.model';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-device',
@@ -22,6 +23,27 @@ export class DeviceComponent implements OnInit {
 
   public refresh(): void {
     this.getDevice();
+  }
+
+  public changeActorState(event: MatSlideToggleChange, actorstate: Actorstate) {
+    actorstate.isLoading = true;
+    if (event.checked === true) {
+      this.iothubService.putActorOn(this.device.deviceId, actorstate.id).subscribe((as: Actorstate) => {
+        event.source.checked = as.state === 1 ? true : false;
+      }, (error: any) => {
+        event.source.checked = false;
+      }, () => {
+        actorstate.isLoading = false;
+      });
+    } else {
+      this.iothubService.putActorOff(this.device.deviceId, actorstate.id).subscribe((as: Actorstate) => {
+        event.source.checked = as.state === 0 ? false : true;
+      }, (error: any) => {
+        event.source.checked = true;
+      }, () => {
+        actorstate.isLoading = false;
+      });
+    }
   }
 
   private getDevice(): void {
