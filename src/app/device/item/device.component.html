@@ -1,10 +1,13 @@
 <app-loader [isLoading]="isLoading" size="1.5"></app-loader>
-<mat-card [hidden]="isLoading" *ngFor="let device of devices">
+<mat-card *ngIf="!isLoading">
     <mat-card-header>
         <mat-card-title>{{ device.deviceId }}</mat-card-title>
         <mat-card-subtitle>{{ device.connectionState }}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-actions align="center">
-        <button mat-raised-button color="primary" (click)="openDevice($event, device)">Select</button>
+    <mat-card-content>
+        
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button mat-raised-button color="primary" (click)="onClick">Select</button>
     </mat-card-actions>
 </mat-card>

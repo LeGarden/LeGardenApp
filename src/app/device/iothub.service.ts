@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '@app/core';
+import { map } from 'rxjs/operators';
+import { Device } from './device.model';
 
 @Injectable()
 export class IothubService {
@@ -11,9 +13,21 @@ export class IothubService {
         this.httpClient.disableApiPrefix();
     }
 
-    public getDevices(): Observable<any> {
+    public getDevices(): Observable<Device[]> {
         return this.httpClient.get(this.baseUri + '/devices', { headers: {
             ['Ocp-Apim-Subscription-Key']: this.authenticationService.credentials.subscriptionKey
-        }});
+        }})
+        .pipe(
+            map((body: Device[]) => body)
+        );
+    }
+
+    public getDevice(deviceId: string): Observable<Device> {
+        return this.httpClient.get(this.baseUri + '/devices/' + deviceId, { headers: {
+            ['Ocp-Apim-Subscription-Key']: this.authenticationService.credentials.subscriptionKey
+        }})
+        .pipe(
+            map((body: Device) => body)
+        );
     }
 }

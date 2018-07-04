@@ -7,6 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { SharedModule } from '@app/shared';
+import { DeviceComponent } from './item/device.component';
 
 @NgModule({
   imports: [
@@ -18,10 +19,12 @@ import { SharedModule } from '@app/shared';
     SharedModule
   ],
   declarations: [
-    DevicesComponent
+    DevicesComponent,
+    DeviceComponent
   ],
   exports: [
-    DevicesComponent
+    DevicesComponent,
+    DeviceComponent
   ],
   providers: [
     {
