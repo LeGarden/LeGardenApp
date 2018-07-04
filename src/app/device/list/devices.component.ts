@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { IothubService } from './iothub.service';
-import { Device } from './device.model';
+import { IothubService } from '../iothub.service';
+import { Device } from '../device.model';
 
 @Component({
   selector: 'app-devices',
