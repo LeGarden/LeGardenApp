@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { IothubService } from './iothub.service';
+import { Device } from './device.model';
 
 @Component({
   selector: 'app-devices',
@@ -8,18 +9,16 @@ import { IothubService } from './iothub.service';
 })
 export class DevicesComponent implements OnInit {
   public isLoading: boolean;
-  // public devices: Device[];
+  public devices: Device[];
 
   constructor(private iothubService: IothubService) { }
 
   ngOnInit() {
     this.isLoading = true;
-    // this.iotHubService.get().then((devices: Device[]) => {
-    //   this.devices = devices;
-    //   this.isLoading = false;
-    // }).catch((reason: string) => {
-    //   this.isLoading = false;
-    // });
+    this.iothubService.getDevices().subscribe((devices: Device[]) => {
+      this.isLoading = false;
+      this.devices = devices;
+    });
   }
 
 }

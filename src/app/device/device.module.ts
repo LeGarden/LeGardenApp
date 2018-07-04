@@ -20,6 +20,9 @@ import { SharedModule } from '@app/shared';
   declarations: [
     DevicesComponent
   ],
+  exports: [
+    DevicesComponent
+  ],
   providers: [
     {
       provide: IothubService,

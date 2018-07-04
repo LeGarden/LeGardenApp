@@ -8,6 +8,7 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
+import { DeviceModule } from '@app/device/device.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -21,6 +22,7 @@ describe('HomeComponent', () => {
           MaterialModule,
           CoreModule,
           SharedModule,
+          DeviceModule,
           HttpClientTestingModule
         ],
         declarations: [HomeComponent],
