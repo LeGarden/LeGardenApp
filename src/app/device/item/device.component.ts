@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Device } from '../../device/device.model';
 import { ActivatedRoute } from '@angular/router';
 import { IothubService } from '@app/device/iothub.service';
