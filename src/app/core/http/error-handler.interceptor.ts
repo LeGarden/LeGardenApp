@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { Logger } from '../logger.service';
+import {MatSnackBar} from '@angular/material';
 
 const log = new Logger('ErrorHandlerInterceptor');
 
@@ -13,6 +14,12 @@ const log = new Logger('ErrorHandlerInterceptor');
  */
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
+
+  /**
+   *
+   */
+  constructor(private snackBar: MatSnackBar) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(error => this.errorHandler(error)));
@@ -24,6 +31,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       // Do something with the error
       log.error('Request error', response);
     }
+    this.snackBar.open('An error occured while processing the request!', null, { duration: 2000 });
     throw response;
   }
 

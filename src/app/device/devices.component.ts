@@ -18,6 +18,8 @@ export class DevicesComponent implements OnInit {
     this.iothubService.getDevices().subscribe((devices: Device[]) => {
       this.isLoading = false;
       this.devices = devices;
+    }, (error: any) => {
+      this.isLoading = false;
     });
   }
 
