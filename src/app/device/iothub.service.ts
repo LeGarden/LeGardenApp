@@ -42,8 +42,8 @@ export class IothubService {
     }
 
     public putActorOn(deviceId: string, actorId: string): Observable<Actorstate> {
-        return this.httpClient.put(this.baseUri + '/devices/' + deviceId + '/actors/' + actorId + '/on',
-            null, { headers: {
+        return this.httpClient.get(this.baseUri + '/devices/' + deviceId + '/actors/' + actorId + '/on',
+            { headers: {
             ['Ocp-Apim-Subscription-Key']: this.authenticationService.credentials.subscriptionKey
         }})
         .pipe(
@@ -52,8 +52,8 @@ export class IothubService {
     }
 
     public putActorOff(deviceId: string, actorId: string): Observable<Actorstate> {
-        return this.httpClient.put(this.baseUri + '/devices/' + deviceId + '/actors/' + actorId + '/off',
-            null, { headers: {
+        return this.httpClient.get(this.baseUri + '/devices/' + deviceId + '/actors/' + actorId + '/off',
+            { headers: {
             ['Ocp-Apim-Subscription-Key']: this.authenticationService.credentials.subscriptionKey
         }})
         .pipe(
