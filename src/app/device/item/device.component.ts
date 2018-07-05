@@ -32,6 +32,7 @@ export class DeviceComponent implements OnInit {
         event.source.checked = as.state === 1 ? true : false;
       }, (error: any) => {
         event.source.checked = false;
+        actorstate.isLoading = false;
       }, () => {
         actorstate.isLoading = false;
       });
@@ -40,6 +41,7 @@ export class DeviceComponent implements OnInit {
         event.source.checked = as.state === 0 ? false : true;
       }, (error: any) => {
         event.source.checked = true;
+        actorstate.isLoading = false;
       }, () => {
         actorstate.isLoading = false;
       });
