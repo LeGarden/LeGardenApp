@@ -5,13 +5,41 @@
     padding: 1em;
     height: 90%;
 
-    .actorstates {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
+    mat-card {
+        mat-card-content {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-content: flex-start;
 
-        mat-slide-toggle {
-            margin-top: 1em;
+            .actorstates {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                min-width: 220px;
+        
+                mat-slide-toggle {
+                    margin-top: 1em;
+                }
+            }
+
+            .properties {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                min-width: 220px;
+
+                mat-list {
+                    mat-list-item {
+                        height: 32px;
+                    }
+                }
+            }
+        }
+        mat-card-actions {
+            button {
+                margin-right: 0.5em;
+            }
         }
     }
   }

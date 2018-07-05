@@ -15,10 +15,18 @@
                 {{ actorstate.name }}
             </mat-slide-toggle>
         </div>
+        <div class="properties">
+            <mat-list>
+                <mat-list-item> Regenmenge (n. 3 Tage): 16 l </mat-list-item>
+                <mat-list-item> Salt </mat-list-item>
+                <mat-list-item> Paprika </mat-list-item>
+            </mat-list> 
+        </div>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-fab (click)="refresh()">
-          <mat-icon class="mat-18">refresh</mat-icon>
-      </button>
+        <button mat-button (click)="onClick">Settings&nbsp;&nbsp;<mat-icon class="mat-18">settings</mat-icon></button>
+        <button mat-fab (click)="refresh()">
+            <mat-icon class="mat-18">refresh</mat-icon>
+        </button>
     </mat-card-actions>
 </mat-card>
