@@ -7,8 +7,8 @@ import { DeviceComponent } from '@app/device/item/device.component';
 
 const routes: Routes = [
   Route.withShell([
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent, data: { title: extract('Home') } },
+    { path: '', redirectTo: '/devices', pathMatch: 'full' },
+    { path: 'devices', component: HomeComponent, data: { title: extract('Devices') } },
     { path: 'device/:deviceId', component: DeviceComponent }
   ])
 ];

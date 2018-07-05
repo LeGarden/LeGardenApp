@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.authenticationService.login(this.loginForm.value).subscribe(() => {
       this.isLoading = false;
-      this.router.navigate(['/home']);
+      this.router.navigate(['/devices']);
     });
   }
 
