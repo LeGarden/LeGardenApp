@@ -77,6 +77,11 @@ export class DeviceComponent implements OnInit {
   }
 
   private getActorStates(deviceId: string): void {
+    if (this.actorstates) {
+      this.actorstates.forEach((as: Actorstate) => {
+        as.isLoading = true;
+      });
+    }
     this.iothubService.getDeviceActorstates(deviceId).subscribe((actorstates: Actorstate[]) => {
       this.actorstates = actorstates;
     }, (error: any) => {
