@@ -16,10 +16,10 @@
             </mat-slide-toggle>
         </div>
         <div class="properties">
-            <mat-list>
-                <mat-list-item> Regenmenge (n. 3 Tage): 16 l </mat-list-item>
-                <mat-list-item> Salt </mat-list-item>
-                <mat-list-item> Paprika </mat-list-item>
+            <mat-list *ngIf="weather">
+                <mat-list-item><div class="mat-list-item-content-wrapper"><span>Conditions:</span><span>{{ weather.currentWeather }}</span></div></mat-list-item>
+                <mat-list-item><div class="mat-list-item-content-wrapper"><span>Rainfall (n. {{ weather.forecastedHours }} h):</span><span>{{ weather.sumOfRain }} l</span></div></mat-list-item>
+                <mat-list-item><div class="mat-list-item-content-wrapper"><span>Temperature (avg. {{ weather.forecastedHours }} h):</span><span>{{ weather.avarageTemperature }} C°</span></div></mat-list-item>
             </mat-list> 
         </div>
     </mat-card-content>

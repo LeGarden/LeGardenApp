@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { SharedModule } from '@app/shared';
 import { DeviceComponent } from './item/device.component';
+import { WeatherService } from './weather.service';
 
 @NgModule({
   imports: [
@@ -30,6 +31,10 @@ import { DeviceComponent } from './item/device.component';
     {
       provide: IothubService,
       useClass: IothubService
+    },
+    {
+      provide: WeatherService,
+      useClass: WeatherService
     }
   ]
 })

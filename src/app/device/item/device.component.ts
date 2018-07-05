@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { IothubService } from '@app/device/iothub.service';
 import { Actorstate } from '@app/device/actorstate.model';
 import { MatSlideToggleChange } from '@angular/material';
+import { WeatherService } from '@app/device/weather.service';
+import { BasicWeather } from '@app/device/basicweather.model';
 
 @Component({
   selector: 'app-device',
@@ -14,15 +16,20 @@ export class DeviceComponent implements OnInit {
   public isLoading: boolean;
   public device: Device;
   public actorstates: Actorstate[];
+  public weather: BasicWeather;
 
-  constructor(private route: ActivatedRoute, private iothubService: IothubService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private iothubService: IothubService,
+    private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.getDevice();
+    this.refresh();
   }
 
   public refresh(): void {
     this.getDevice();
+    this.getWeather();
   }
 
   public changeActorState(event: MatSlideToggleChange, actorstate: Actorstate) {
@@ -59,6 +66,13 @@ export class DeviceComponent implements OnInit {
       }
     }, (error: any) => {
       this.isLoading = false;
+    });
+  }
+
+  private getWeather(): void {
+    this.weatherService.getBasicWeather().subscribe((weather: BasicWeather) => {
+      this.weather = weather;
+    }, (error: any) => {
     });
   }
 
