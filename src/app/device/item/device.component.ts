@@ -6,6 +6,7 @@ import { Actorstate } from '@app/device/actorstate.model';
 import { MatSlideToggleChange } from '@angular/material';
 import { WeatherService } from '@app/device/weather.service';
 import { BasicWeather } from '@app/device/basicweather.model';
+import { IrrigationRecommendation } from '@app/irregationrecommendation.model';
 
 @Component({
   selector: 'app-device',
@@ -17,6 +18,7 @@ export class DeviceComponent implements OnInit {
   public device: Device;
   public actorstates: Actorstate[];
   public weather: BasicWeather;
+  public irrigationRecommendation: IrrigationRecommendation;
 
   constructor(
     private route: ActivatedRoute,
@@ -72,6 +74,14 @@ export class DeviceComponent implements OnInit {
   private getWeather(): void {
     this.weatherService.getBasicWeather().subscribe((weather: BasicWeather) => {
       this.weather = weather;
+      this.getIrrigationRecommendation(this.weather.sumOfRain, this.weather.avarageTemperature);
+    }, (error: any) => {
+    });
+  }
+
+  private getIrrigationRecommendation(mm: number, celsius: number): void {
+    this.weatherService.getIrrigationRecommendation(mm, celsius).subscribe((r: IrrigationRecommendation) => {
+      this.irrigationRecommendation = r;
     }, (error: any) => {
     });
   }

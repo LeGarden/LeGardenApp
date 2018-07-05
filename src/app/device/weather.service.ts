@@ -4,6 +4,7 @@ import { AuthenticationService } from '@app/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BasicWeather } from '@app/device/basicweather.model';
+import { IrrigationRecommendation } from '@app/irregationrecommendation.model';
 
 @Injectable()
 export class WeatherService {
@@ -20,6 +21,17 @@ export class WeatherService {
         }})
         .pipe(
             map((body: BasicWeather) => body)
+        );
+    }
+
+    public getIrrigationRecommendation(mm: number, celsius: number): Observable<IrrigationRecommendation> {
+        return this.httpClient.get(
+            this.baseUri +
+            '/weather/irrigationrecommendation?mm=' + Math.round(mm) + '&celsius=' + Math.round(celsius), { headers: {
+            ['Ocp-Apim-Subscription-Key']: this.authenticationService.credentials.subscriptionKey
+        }})
+        .pipe(
+            map((body: IrrigationRecommendation) => body)
         );
     }
 }

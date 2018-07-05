@@ -21,7 +21,10 @@
                 <mat-list-item><div class="mat-list-item-content-wrapper"><span>Conditions:</span><span>{{ weather.currentWeather }}</span></div></mat-list-item>
                 <mat-list-item><div class="mat-list-item-content-wrapper"><span>Rainfall (n. {{ weather.forecastedHours }} h):</span><span>{{ weather.sumOfRain }} mm</span></div></mat-list-item>
                 <mat-list-item><div class="mat-list-item-content-wrapper"><span>Temperature (avg. {{ weather.forecastedHours }} h):</span><span>{{ weather.avarageTemperature }} C°</span></div></mat-list-item>
-            </mat-list> 
+            </mat-list>
+            <mat-list *ngIf="irrigationRecommendation">
+                <mat-list-item><div class="mat-list-item-content-wrapper"><span>Recommended irrigation:</span><span>{{ irrigationRecommendation.minutes | number:'1.0-0' }} m</span></div></mat-list-item>
+            </mat-list>
         </div>
     </mat-card-content>
     <mat-card-actions align="end">
