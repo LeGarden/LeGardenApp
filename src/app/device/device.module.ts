@@ -9,6 +9,8 @@ import { HttpModule } from '@angular/http';
 import { SharedModule } from '@app/shared';
 import { DeviceComponent } from './item/device.component';
 import { WeatherService } from './weather.service';
+import { LogAnalyticService } from './loganalytic.service';
+import { LogsdialogComponent } from './logs/logsdialog/logsdialog.component';
 
 @NgModule({
   imports: [
@@ -21,12 +23,14 @@ import { WeatherService } from './weather.service';
   ],
   declarations: [
     DevicesComponent,
-    DeviceComponent
+    DeviceComponent,
+    LogsdialogComponent
   ],
   exports: [
     DevicesComponent,
     DeviceComponent
   ],
+  entryComponents: [LogsdialogComponent],
   providers: [
     {
       provide: IothubService,
@@ -35,6 +39,10 @@ import { WeatherService } from './weather.service';
     {
       provide: WeatherService,
       useClass: WeatherService
+    },
+    {
+      provide: LogAnalyticService,
+      useClass: LogAnalyticService
     }
   ]
 })

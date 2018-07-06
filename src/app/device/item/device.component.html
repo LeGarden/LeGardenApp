@@ -7,14 +7,23 @@
     <mat-card-content>
         <mat-divider></mat-divider>
         <div class="actorstates">
-            <mat-slide-toggle *ngFor="let actorstate of actorstates"
-                class="actorstate"
-                [color]="'accent'"
-                [checked]="actorstate.state == 1"
-                [disabled]="device.connectionState != 'Connected' || actorstate.isLoading"
-                (change)="changeActorState($event, actorstate)">
-                {{ actorstate.name }}
-            </mat-slide-toggle>
+            <div class="actorstates-item" *ngFor="let actorstate of actorstates">
+                <mat-slide-toggle
+                    class="actorstate"
+                    [color]="'accent'"
+                    [checked]="actorstate.state == 1"
+                    [disabled]="device.connectionState != 'Connected' || actorstate.isLoading"
+                    (change)="changeActorState($event, actorstate)">
+                    {{ actorstate.name }}
+                </mat-slide-toggle>
+                <div class="actorstates-item-info">
+                    <div class="actorstates-item-info-lastperiod" *ngIf="actorstate && actorstate.actorStateHistory && actorstate.actorStateHistory.lastActorPeriod">
+                        <div>{{actorstate.actorStateHistory.lastActorPeriod.timestamp | date:'dd.MM.yyyy' }}</div>
+                        <div>{{actorstate.actorStateHistory.lastActorPeriod.timestamp | date:'H:mm' }}</div>
+                        <div>({{actorstate.actorStateHistory.lastActorPeriod.duration | number:'1.0-0' }} m)</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="properties">
             <mat-list *ngIf="weather">
@@ -28,7 +37,8 @@
         </div>
     </mat-card-content>
     <mat-card-actions align="end">
-        <button mat-button (click)="onClick">Settings&nbsp;&nbsp;<mat-icon class="mat-18">settings</mat-icon></button>
+        <button mat-button (click)="openLogs()">Logs</button>
+        <button mat-button (click)="onClick">Settings</button>
         <button mat-fab (click)="refresh()">
             <mat-icon class="mat-18">refresh</mat-icon>
         </button>

@@ -18,9 +18,29 @@
                 flex-grow: 1;
                 min-width: 220px;
                 margin-top: 1em;
-        
-                mat-slide-toggle {
-                    margin-top: 1em;
+                
+                .actorstates-item {
+                    width: 100%;
+                    margin-top: 2em;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-right: 4em;
+
+                    mat-slide-toggle {
+                        width: 60%;
+                        height: 100%;
+                    }
+
+                    .actorstates-item-info {
+                        font-size: 10px;
+
+                        .actorstates-item-info-lastperiod {
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
                 }
             }
 
@@ -34,6 +54,7 @@
                 mat-list {
                     mat-list-item {
                         height: 32px;
+                        font-size: 14px;
 
                         .mat-list-item-content-wrapper {
                             padding-right: 2em;

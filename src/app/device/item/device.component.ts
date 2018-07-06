@@ -3,10 +3,13 @@ import { Device } from '../../device/device.model';
 import { ActivatedRoute } from '@angular/router';
 import { IothubService } from '@app/device/iothub.service';
 import { Actorstate } from '@app/device/actorstate.model';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSlideToggleChange, MatDialog } from '@angular/material';
 import { WeatherService } from '@app/device/weather.service';
 import { BasicWeather } from '@app/device/basicweather.model';
 import { IrrigationRecommendation } from '@app/irregationrecommendation.model';
+import { LogsdialogComponent } from '@app/device/logs/logsdialog/logsdialog.component';
+import { LogAnalyticService } from '@app/device/loganalytic.service';
+import { ActorStateHistory } from '@app/device/actorstatehistory.model';
 
 @Component({
   selector: 'app-device',
@@ -23,7 +26,9 @@ export class DeviceComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private iothubService: IothubService,
-    private weatherService: WeatherService) { }
+    private weatherService: WeatherService,
+    public logsDialog: MatDialog,
+    private logService: LogAnalyticService) { }
 
   ngOnInit() {
     this.refresh();
@@ -55,6 +60,14 @@ export class DeviceComponent implements OnInit {
         actorstate.isLoading = false;
       });
     }
+  }
+
+  public openLogs() {
+    const dialogRef = this.logsDialog.open(LogsdialogComponent, {
+      width: '98%',
+      height: '95%',
+      data: this.device
+    });
   }
 
   private getDevice(): void {
@@ -94,6 +107,19 @@ export class DeviceComponent implements OnInit {
     }
     this.iothubService.getDeviceActorstates(deviceId).subscribe((actorstates: Actorstate[]) => {
       this.actorstates = actorstates;
+      this.getActorStateStatistic();
+    }, (error: any) => {
+    });
+  }
+
+  private getActorStateStatistic(): void {
+    this.logService.getActorStateStatistic().subscribe((statistic: ActorStateHistory[]) => {
+      this.actorstates.forEach((as: Actorstate) => {
+        const actorStatistic = statistic.find(x => x.actorName === as.name);
+        if (actorStatistic) {
+          as.actorStateHistory = actorStatistic;
+        }
+      });
     }, (error: any) => {
     });
   }

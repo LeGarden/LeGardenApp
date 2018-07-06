@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Logs - {{ device.deviceId }}</h1>
+<div mat-dialog-content>
+    <!-- <mat-toolbar class="searcher">
+        <mat-form-field>
+          <input matInput placeholder="Search" [(ngModel)]="messageFilter.message">
+        </mat-form-field>
+    </mat-toolbar> -->
+    <app-loader [isLoading]="isLoading" size="1.5"></app-loader>
+    <div class="log-container" *ngIf="analyticLog">
+        <div class="log-line" *ngFor="let log of analyticLog.rows">
+          <div class="log-ts">{{ log[0] | date:'yyyy-MM-dd HH:mm:ss' }}</div>
+          <div class="log-m">{{ log[1] }}</div>
+        </div>
+      </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="OnCancel()">Cancel</button>
+</div>
