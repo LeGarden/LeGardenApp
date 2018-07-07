@@ -2,7 +2,8 @@
 <div class="calendar-container">
     <mwl-calendar-month-view *ngIf="events && isLoading === false"
     [viewDate]="viewDate"
-    [events]="events">
+    [events]="events"
+    (dayClicked)="onDayClicked($event.day)">
   </mwl-calendar-month-view>
 </div>
 <div class="calendar-controls" *ngIf="isLoading === false">

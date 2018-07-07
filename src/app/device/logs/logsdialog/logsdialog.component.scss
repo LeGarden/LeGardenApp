@@ -1,3 +1,6 @@
+@import '~@angular/material/theming';
+$config: mat-typography-config();
+
 :host {
     height: 100%;
     width: 100%;
@@ -6,7 +9,8 @@
     justify-content: flex-start;
         
     .log-container {
-        font-size: 10px;
+        font-size: mat-font-size($config, caption);
+        font-family: mat-font-family($config);
         padding: 1em;
     
         .log-line {
@@ -44,14 +48,13 @@
             }
     
             .log-ts {
-                flex: 0 0 100px;
+                flex: 0 0 120px;
             }
             .log-env {
                 flex: 0 0 80px;
             }
     
             .log-m {
-                font-size: 12px;
                 flex: 1 1 auto;
                 max-height: 100px;
                 overflow: hidden;

@@ -12,6 +12,7 @@ import { LogsdialogComponent } from './logs/logsdialog/logsdialog.component';
 import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActorstateoverviewComponent } from './actorstate/actorstateoverview/actorstateoverview.component';
+import { ActorstatedaydialogComponent } from './actorstate/actorstatedaydialog/actorstatedaydialog.component';
 
 @NgModule({
   imports: [
@@ -27,12 +28,13 @@ import { ActorstateoverviewComponent } from './actorstate/actorstateoverview/act
   declarations: [
     DeviceComponent,
     LogsdialogComponent,
-    ActorstateoverviewComponent
+    ActorstateoverviewComponent,
+    ActorstatedaydialogComponent
   ],
   exports: [
     DeviceComponent
   ],
-  entryComponents: [LogsdialogComponent],
+  entryComponents: [LogsdialogComponent, ActorstatedaydialogComponent],
   providers: [
     {
       provide: WeatherService,

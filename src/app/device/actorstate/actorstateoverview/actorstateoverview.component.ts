@@ -13,6 +13,8 @@ import {
   isSameMonth,
   addHours
 } from 'date-fns';
+import { MatDialog } from '@angular/material';
+import { ActorstatedaydialogComponent } from '@app/device/actorstate/actorstatedaydialog/actorstatedaydialog.component';
 
 @Component({
   selector: 'app-actorstateoverview',
@@ -26,7 +28,7 @@ export class ActorstateoverviewComponent implements OnInit {
   public events: CalendarEvent[] = [];
   public view = 'month';
 
-  constructor(private router: Router, private logService: LogAnalyticService) { }
+  constructor(private router: Router, private logService: LogAnalyticService, public dayActorStateDialog: MatDialog) { }
 
   ngOnInit() {
     this.refresh();
@@ -34,6 +36,20 @@ export class ActorstateoverviewComponent implements OnInit {
 
   public refresh(): void {
     this.getActorStateHistory();
+  }
+
+  public onDayClicked(day: any): void {
+      const dialogRef = this.dayActorStateDialog.open(ActorstatedaydialogComponent, {
+        width: '98%',
+        data: day
+      });
+  }
+
+  public onEventClicked(a: string, event: any): void {
+    const dialogRef = this.dayActorStateDialog.open(ActorstatedaydialogComponent, {
+      width: '98%',
+      data: {events: [event]}
+    });
   }
 
   private getActorStateHistory(): void {
@@ -46,8 +62,9 @@ export class ActorstateoverviewComponent implements OnInit {
           if (atc.duration) {
             this.events.push({
               title: '(' + Math.round(atc.duration) + ' m) ' + ash.actorName,
-              start: new Date(atc.timestamp - atc.duration),
-              end: new Date(atc.timestamp)
+              start: new Date(atc.timestamp - (atc.duration * 60000)),
+              end: new Date(atc.timestamp),
+              meta: {ash, atc}
             });
           }
         });

@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+$config: mat-typography-config();
+
+:host {
+    .container {
+        font-size: mat-font-size($config, body-1);
+        font-family: mat-font-family($config);
+        display: flex;
+        flex-direction: column;
+        
+        .mainline {
+            margin-top: 1em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .actorname {
+                font-weight: bold;
+            }
+        }
+        
+        .subline {
+            margin-bottom: 1em;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+    }
+}
