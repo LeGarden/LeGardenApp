@@ -8,6 +8,10 @@
 
 // 3rd party libraries
 @import "~material-design-icons-iconfont/dist/fonts/material-icons.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+.cal-month-view .cal-header .cal-cell {
+    width: 20px;
+}
 
 // Angular Material custom theme
 // The mixins below must be included once so we separated them from the variables

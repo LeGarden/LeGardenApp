@@ -1,0 +1,19 @@
+<app-loader [isLoading]="isLoading" size="1.5"></app-loader>
+<div class="calendar-container">
+    <mwl-calendar-month-view *ngIf="events && isLoading === false"
+    [viewDate]="viewDate"
+    [events]="events">
+  </mwl-calendar-month-view>
+</div>
+<div class="calendar-controls" *ngIf="isLoading === false">
+    <button mat-raised-button
+    mwlCalendarPreviousView
+    [view]="view"
+    [(viewDate)]="viewDate"
+    (viewDateChange)="activeDayIsOpen = false">Previous</button>
+    <button mat-raised-button
+    mwlCalendarNextView
+    [view]="view"
+    [(viewDate)]="viewDate"
+    (viewDateChange)="activeDayIsOpen = false">Next</button>
+</div>

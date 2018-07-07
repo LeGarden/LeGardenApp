@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Device } from '../../device/device.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IothubService } from '@app/device/iothub.service';
 import { Actorstate } from '@app/device/actorstate.model';
 import { MatSlideToggleChange, MatDialog } from '@angular/material';
@@ -28,7 +28,8 @@ export class DeviceComponent implements OnInit {
     private iothubService: IothubService,
     private weatherService: WeatherService,
     public logsDialog: MatDialog,
-    private logService: LogAnalyticService) { }
+    private logService: LogAnalyticService,
+    private router: Router) { }
 
   ngOnInit() {
     this.refresh();
@@ -68,6 +69,10 @@ export class DeviceComponent implements OnInit {
       height: '95%',
       data: this.device
     });
+  }
+
+  public openActorStateOverview() {
+    this.router.navigate(['/device/' + this.device.deviceId + '/actorstates']);
   }
 
   private getDevice(): void {

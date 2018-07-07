@@ -1,0 +1,16 @@
+:host{
+    .calendar-controls {
+        left: 0;
+        bottom: 0;
+        position: sticky;
+        padding: 1em;
+        width: 100%;
+        display: flex;
+        display: row;
+        justify-content: space-between;
+    }
+
+    .calendar-container {
+        padding: 1em;
+    }
+}

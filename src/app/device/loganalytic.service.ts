@@ -56,11 +56,14 @@ export class LogAnalyticService {
             result.forEach((ash: ActorStateHistory) => {
                 for (let i = 0; i < ash.actorStateChanges.length; i++) {
                     const element: ActorStateChange = ash.actorStateChanges[i];
-                    if (element.state === 0
-                        && ash.actorStateChanges[i + 1]
-                        && ash.actorStateChanges[i + 1].state === 1) {
-                        element.duration =
-                            (ash.actorStateChanges[i].timestamp - ash.actorStateChanges[i + 1].timestamp) / 6000;
+                    if (element.state === 0) {
+                        const correspondingOn: ActorStateChange =
+                            ash.actorStateChanges.slice(i + 1).find(x => x.state === 1);
+
+                        if (correspondingOn) {
+                            element.duration =
+                            (ash.actorStateChanges[i].timestamp - correspondingOn.timestamp) / 60000;
+                        }
                     }
                 }
                 const lastDurated = ash.actorStateChanges.find(x => x.duration > 0);

@@ -11,6 +11,9 @@ import { DeviceComponent } from './item/device.component';
 import { WeatherService } from './weather.service';
 import { LogAnalyticService } from './loganalytic.service';
 import { LogsdialogComponent } from './logs/logsdialog/logsdialog.component';
+import { CalendarModule } from 'angular-calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActorstateoverviewComponent } from './actorstate/actorstateoverview/actorstateoverview.component';
 
 @NgModule({
   imports: [
@@ -19,12 +22,15 @@ import { LogsdialogComponent } from './logs/logsdialog/logsdialog.component';
     MaterialModule,
     HttpClientModule,
     HttpModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    CalendarModule.forRoot()
   ],
   declarations: [
     DevicesComponent,
     DeviceComponent,
-    LogsdialogComponent
+    LogsdialogComponent,
+    ActorstateoverviewComponent
   ],
   exports: [
     DevicesComponent,
