@@ -4,90 +4,68 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-
-    .mat-dialog-title {
-
-    }
-
-    .mat-dialog-content {
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        max-height: 100%;
-
-        .searcher {
-            position: sticky;
-            position: -webkit-sticky;
-            top: 0;
-            z-index: 1000;
-            font-size: 14px;
-        }
         
-        .log-container {
-            font-size: 10px;
-        
-            .log-line {
-                display: flex;
-                flex-direction: row;
-                padding-top: 2px;
-                padding-bottom: 2px;
-        
-                div {
-                    padding-right: 4px;
-                }
-        
-                &.Warning {
-                    .log-m {
-                        color: #FFC107;
-                    }
-                }
-        
-                &.Information {
-                    .log-m {
-                        color: #4CAF50;
-                    }
-                }
-        
-                &.Error {
-                    .log-m {
-                        color: #F44336;
-                    }
-                }
-        
-                &.Fatal {
-                    .log-m {
-                        color: #F44336;
-                    }
-                }
-        
-                .log-ts {
-                    flex: 0 0 100px;
-                }
-                .log-env {
-                    flex: 0 0 80px;
-                }
-        
-                .log-m {
-                    font-size: 12px;
-                    flex: 1 1 auto;
-                    max-height: 100px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-        
-                .log-ctx {
-                    flex: 0 0 150px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    direction: rtl;
-                }
-                
+    .log-container {
+        font-size: 10px;
+        padding: 1em;
+    
+        .log-line {
+            display: flex;
+            flex-direction: row;
+            padding-top: 2px;
+            padding-bottom: 2px;
+    
+            div {
+                padding-right: 4px;
             }
+    
+            &.Warning {
+                .log-m {
+                    color: #FFC107;
+                }
+            }
+    
+            &.Information {
+                .log-m {
+                    color: #4CAF50;
+                }
+            }
+    
+            &.Error {
+                .log-m {
+                    color: #F44336;
+                }
+            }
+    
+            &.Fatal {
+                .log-m {
+                    color: #F44336;
+                }
+            }
+    
+            .log-ts {
+                flex: 0 0 100px;
+            }
+            .log-env {
+                flex: 0 0 80px;
+            }
+    
+            .log-m {
+                font-size: 12px;
+                flex: 1 1 auto;
+                max-height: 100px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+    
+            .log-ctx {
+                flex: 0 0 150px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                direction: rtl;
+            }
+            
         }
-    }
-
-    .mat-dialog-actions {
-
     }
 }

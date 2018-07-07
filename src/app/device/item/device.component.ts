@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Device } from '../../device/device.model';
+import { Device } from '../../core/device.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IothubService } from '@app/device/iothub.service';
+import { IothubService } from '@app/core/iothub.service';
 import { Actorstate } from '@app/device/actorstate.model';
 import { MatSlideToggleChange, MatDialog } from '@angular/material';
 import { WeatherService } from '@app/device/weather.service';
@@ -61,18 +61,6 @@ export class DeviceComponent implements OnInit {
         actorstate.isLoading = false;
       });
     }
-  }
-
-  public openLogs() {
-    const dialogRef = this.logsDialog.open(LogsdialogComponent, {
-      width: '98%',
-      height: '95%',
-      data: this.device
-    });
-  }
-
-  public openActorStateOverview() {
-    this.router.navigate(['/device/' + this.device.deviceId + '/actorstates']);
   }
 
   private getDevice(): void {

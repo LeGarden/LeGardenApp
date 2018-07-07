@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { Device } from '@app/device/device.model';
+import { Device } from '@app/core/device.model';
 import { LogAnalyticService } from '@app/device/loganalytic.service';
 import { AnalyticLog } from '@app/device/analyticlog.model';
 
@@ -16,18 +15,11 @@ export class LogsdialogComponent implements OnInit {
   // public messageFilter: any = { message: '' };
 
   constructor(
-    public dialogRef: MatDialogRef<LogsdialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Device,
     private logservice: LogAnalyticService) {
-    this.device = data;
   }
 
   ngOnInit() {
     this.getLogs();
-  }
-
-  public OnCancel(): void {
-    this.dialogRef.close();
   }
 
   private getLogs(): void {

@@ -2,7 +2,7 @@
   <mat-sidenav-container fxFill>
     <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="!isMobile" [disableClose]="!isMobile"
                  ngClass.gt-sm="has-border">
-      <mat-toolbar color="primary">
+      <mat-toolbar class="fixed-toolbar" color="primary">
         <span translate>APP_NAME</span>
         <div fxFlex></div>
         <div>
@@ -31,16 +31,36 @@
         </div>
       </mat-toolbar>
       <nav>
+        <div class="device-selector">
+            <span *ngIf="isLoading">loading...</span>
+            <mat-form-field *ngIf="!isLoading">
+                <mat-select placeholder="device" [(ngModel)]="selectedDevice" name="device" (selectionChange)="onDeviceSelected($event)">
+                  <mat-option *ngFor="let device of devices"  [value]="device">
+                    {{ device.deviceId }} - {{ device.connectionState }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <mat-list *ngIf="selectedDevice">
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLinkActive="active" (click)="onMainClick($event)">
+            <span translate>Device</span>
+          </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLinkActive="active" (click)="onActorhistoryClick($event)">
+            <span translate>Actorhistory</span>
+          </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLinkActive="active" (click)="onLogsClick($event)">
+            <span translate>Logs</span>
+          </a>
+        </mat-list>
         <mat-list>
-          <mat-divider></mat-divider>
-          <a mat-list-item routerLink="/devices" routerLinkActive="active" (click)="isMobile && sidenav.close()">
-            <span translate>Devices</span>
-          </a>
-          <mat-divider></mat-divider>
-          <a mat-list-item routerLink="/about" routerLinkActive="active" (click)="isMobile && sidenav.close()">
-            <span translate>About</span>
-          </a>
-          <mat-divider></mat-divider>
+            <mat-divider></mat-divider>
+            <a mat-list-item routerLink="/about" routerLinkActive="active" (click)="isMobile && sidenav.close()">
+              <span translate>About</span>
+            </a>
+            <mat-divider></mat-divider>
         </mat-list>
       </nav>
     </mat-sidenav>
@@ -51,7 +71,9 @@
         </button>
         <span>{{title}}</span>
       </mat-toolbar>
-      <router-outlet></router-outlet>
+      <div class="outlet-container">
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

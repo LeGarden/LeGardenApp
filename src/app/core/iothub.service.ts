@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from '@app/core';
+import { AuthenticationService } from './authentication/authentication.service';
 import { map } from 'rxjs/operators';
 import { Device } from './device.model';
 import { Actorstate } from '@app/device/actorstate.model';
