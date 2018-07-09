@@ -1,4 +1,4 @@
-import { ActorStateHistory } from '@app/device/actorstatehistory.model';
+import { ActorStateHistory } from '@app/core/actorstatehistory.model';
 
 export interface Actorstate {
     id: string;

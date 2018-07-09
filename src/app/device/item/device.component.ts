@@ -9,7 +9,8 @@ import { BasicWeather } from '@app/device/basicweather.model';
 import { IrrigationRecommendation } from '@app/irregationrecommendation.model';
 import { LogsdialogComponent } from '@app/device/logs/logsdialog/logsdialog.component';
 import { LogAnalyticService } from '@app/device/loganalytic.service';
-import { ActorStateHistory } from '@app/device/actorstatehistory.model';
+import { ActorStateHistory } from '@app/core/actorstatehistory.model';
+import {Duration, add, subtract} from 'date-tools';
 
 @Component({
   selector: 'app-device',
@@ -106,9 +107,11 @@ export class DeviceComponent implements OnInit {
   }
 
   private getActorStateStatistic(): void {
-    this.logService.getActorStateStatistic().subscribe((statistic: ActorStateHistory[]) => {
+    const deviceId = this.route.snapshot.paramMap.get('deviceId');
+    this.iothubService.getActorStateHistory(deviceId, subtract(new Date(), Duration.Days(5)), new Date())
+    .subscribe((statistic: ActorStateHistory[]) => {
       this.actorstates.forEach((as: Actorstate) => {
-        const actorStatistic = statistic.find(x => x.actorName === as.name);
+        const actorStatistic = statistic.find(x => x.actorId === as.id);
         if (actorStatistic) {
           as.actorStateHistory = actorStatistic;
         }

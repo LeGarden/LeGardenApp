@@ -1,5 +1,6 @@
 export interface ActorStateHistory {
     actorName: string;
+    actorId: string;
     actorStateChanges: ActorStateChange[];
     lastActorPeriod?: ActorStateChange;
     lastOn?: number;
@@ -7,6 +8,6 @@ export interface ActorStateHistory {
 
 export interface ActorStateChange {
     timestamp: number;
-    state: number;
+    state: string;
     duration?: number;
 }

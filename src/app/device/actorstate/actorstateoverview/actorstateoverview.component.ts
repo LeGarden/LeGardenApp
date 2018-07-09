@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LogAnalyticService } from '@app/device/loganalytic.service';
-import { ActorStateHistory, ActorStateChange } from '@app/device/actorstatehistory.model';
+import { ActorStateHistory, ActorStateChange } from '@app/core/actorstatehistory.model';
 import { CalendarEvent } from 'angular-calendar';
 import {
   startOfDay,
@@ -15,24 +15,31 @@ import {
 } from 'date-fns';
 import { MatDialog } from '@angular/material';
 import { ActorstatedaydialogComponent } from '@app/device/actorstate/actorstatedaydialog/actorstatedaydialog.component';
+import { IothubService } from '@app/core/iothub.service';
+import {Duration, add, subtract} from 'date-tools';
 
 @Component({
   selector: 'app-actorstateoverview',
   templateUrl: './actorstateoverview.component.html',
   styleUrls: ['./actorstateoverview.component.scss']
 })
-export class ActorstateoverviewComponent implements OnInit {
+export class ActorstateoverviewComponent implements OnInit, OnChanges {
   public isLoading: boolean;
   public actorStateHistory: ActorStateHistory[];
   public viewDate: Date = new Date();
   public events: CalendarEvent[] = [];
   public view = 'month';
 
-  constructor(private router: Router, private logService: LogAnalyticService, public dayActorStateDialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    private iothubService: IothubService,
+    public dayActorStateDialog: MatDialog) { }
 
   ngOnInit() {
     this.refresh();
   }
+
+  ngOnChanges(changes: SimpleChanges) {}
 
   public refresh(): void {
     this.getActorStateHistory();
@@ -53,15 +60,18 @@ export class ActorstateoverviewComponent implements OnInit {
   }
 
   private getActorStateHistory(): void {
+    const deviceId = this.route.snapshot.paramMap.get('deviceId');
     this.isLoading = true;
-    this.logService.getActorStateStatistic().subscribe((statistic: ActorStateHistory[]) => {
+    this.iothubService.getActorStateHistory(deviceId,
+      new Date(this.viewDate.setDate(1)), add(new Date(this.viewDate.setDate(1)), Duration.Months(1)))
+      .subscribe((statistic: ActorStateHistory[]) => {
       this.actorStateHistory = statistic;
 
       statistic.forEach((ash: ActorStateHistory) => {
         ash.actorStateChanges.reverse().forEach((atc: ActorStateChange) => {
           if (atc.duration) {
             this.events.push({
-              title: '(' + Math.round(atc.duration) + ' m) ' + ash.actorName,
+              title: '(' + Math.round(atc.duration) + ' m) ' + ash.actorId,
               start: new Date(atc.timestamp - (atc.duration * 60000)),
               end: new Date(atc.timestamp),
               meta: {ash, atc}
