@@ -11,10 +11,12 @@
     mwlCalendarPreviousView
     [view]="view"
     [(viewDate)]="viewDate"
-    (viewDateChange)="activeDayIsOpen = false && refresh()">Previous</button>
+    (viewDateChange)="activeDayIsOpen = false && refresh()"
+    (click)="refresh()">Previous</button>
     <button mat-raised-button
     mwlCalendarNextView
     [view]="view"
     [(viewDate)]="viewDate"
-    (viewDateChange)="activeDayIsOpen = false && refresh()">Next</button>
+    (viewDateChange)="activeDayIsOpen = false && refresh()"
+    (click)="refresh()">Next</button>
 </div>

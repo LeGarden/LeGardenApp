@@ -1,6 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LogAnalyticService } from '@app/device/loganalytic.service';
 import { ActorStateHistory, ActorStateChange } from '@app/core/actorstatehistory.model';
 import { CalendarEvent } from 'angular-calendar';
 import {
@@ -65,6 +64,7 @@ export class ActorstateoverviewComponent implements OnInit, OnChanges {
     this.iothubService.getActorStateHistory(deviceId,
       new Date(this.viewDate.setDate(1)), add(new Date(this.viewDate.setDate(1)), Duration.Months(1)))
       .subscribe((statistic: ActorStateHistory[]) => {
+      this.events = [];
       this.actorStateHistory = statistic;
 
       statistic.forEach((ash: ActorStateHistory) => {
